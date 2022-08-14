@@ -124,7 +124,7 @@ class ApplicationController < Sinatra::Base
     end
 
     post '/vehicle_logs' do
-        # Looks for the last log for this car 
+        # Look for the last log for this car 
         # to determine the miles driven between logs
         last_log = VehicleLog.all
             .where("vehicle_id = ? and log_date <= ?", 

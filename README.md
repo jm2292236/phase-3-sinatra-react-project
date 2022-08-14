@@ -1,3 +1,6 @@
+# Phase 3 Project FrontEnd
+https://github.com/jm2292236/phase-3-frontend-project
+
 # Phase 3 Project Guidelines
 
 ## Learning Goals
