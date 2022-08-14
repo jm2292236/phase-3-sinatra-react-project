@@ -119,7 +119,7 @@ class ApplicationController < Sinatra::Base
     get '/vehicle_logs/average_mpg/:id' do
         VehicleLog.all
             .where("vehicle_id = ? AND log_type = ?", params[:id], FILL_UP)
-            .average("odometer / quantity")
+            .average("miles_driven / quantity")
             .to_json
     end
 
