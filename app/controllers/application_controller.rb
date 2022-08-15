@@ -13,6 +13,7 @@ class ApplicationController < Sinatra::Base
     # Get all the log for a specific vehicle
     get '/vehicle_logs/:id' do
         VehicleLog.all.where("vehicle_id = ?", params[:id]).to_json
+        # VehicleLog.log_with_relationships params[:id]
     end
 
     # Get the total cost by type of expense

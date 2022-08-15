@@ -1,0 +1,35 @@
+=== Postman tests ===
+
+- Vehicles -
+{
+    "make": "Chrysler",
+    "model": "Neon",
+    "year": 1994
+}
+
+
+- Services -
+{
+    "description": "20,000 miles"
+}
+
+
+- Locations -
+{
+    "name": "The Auto Store"
+}
+
+
+- Vehicle logs -
+{
+    "log_type": 1,
+    "log_date": "22/01/06",
+    "odometer": 200,
+    "quantity": 8.00,
+    "price_per_gallon": 3,
+    "total_cost": 24,
+    "notes": "Fill-up",
+    "service_id": ,
+    "location_id": 3,
+    "vehicle_id": 5
+}
