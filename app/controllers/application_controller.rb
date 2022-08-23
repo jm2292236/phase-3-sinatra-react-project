@@ -27,6 +27,7 @@ class ApplicationController < Sinatra::Base
             .to_json
     end
 
+    # get the average MPG for a specific vehicle
     get '/vehicle_logs/average_mpg/:id' do
         VehicleLog.all
             .where("vehicle_id = ? AND log_type = ?", params[:id], FILL_UP)
@@ -34,19 +35,15 @@ class ApplicationController < Sinatra::Base
             .to_json
     end
 
+    # add a log for a vehicle
     post '/vehicle_logs' do
-        # Look for the last log for this car 
+        # Look for the last log for this vehicle
         # to determine the miles driven between logs
-        last_log = VehicleLog.all
-            .where("vehicle_id = ? and log_date <= ?", 
-                params[:vehicle_id], params[:log_date])
-            .last
-        if last_log == nil
-            last_odometer = 0
-        else
-            last_odometer = last_log.odometer
-        end
+        last_odometer = VehicleLog.last_log(
+            params[:vehicle_id], params[:log_date]
+        )
 
+        binding.pry
         vehicle_log = VehicleLog.create(
             log_type: params[:log_type],
             log_date: params[:log_date],

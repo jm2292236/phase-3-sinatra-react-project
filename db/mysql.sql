@@ -6,3 +6,7 @@ SELECT * FROM services;
 SELECT * FROM locations;
 SELECT * FROM vehicle_logs WHERE vehicle_id = 1;
 SELECT * FROM vehicle_logs;
+
+SELECT vehicle_logs.*, services.description, locations.name
+FROM vehicle_logs, services, locations
+LEFT JOIN 
