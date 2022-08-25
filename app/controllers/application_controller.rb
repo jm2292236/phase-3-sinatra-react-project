@@ -10,9 +10,9 @@ class ApplicationController < Sinatra::Base
         'Vehicle Log App Home'
     end
 
-    # Get all the log for a specific vehicle
+    # Get all the logs for a specific vehicle
     get '/vehicle_logs/:id' do
-        VehicleLog.all.where("vehicle_id = ?", params[:id]).to_json
+        VehicleLog.all.where("vehicle_id = ?", params[:id]).order(log_date: :desc).to_json
         # VehicleLog.log_with_relationships params[:id]
     end
 
@@ -33,6 +33,21 @@ class ApplicationController < Sinatra::Base
             .where("vehicle_id = ? AND log_type = ?", params[:id], FILL_UP)
             .average("miles_driven / quantity")
             .to_json
+    end
+
+    # get the totals for a specific vehicle
+    get '/vehicle_logs/totals/:id' do
+        total_cost = VehicleLog.all
+            .where("vehicle_id = ?", params[:id])
+            .group(:log_type)
+            .sum(:total_cost)
+
+        average_mpg = VehicleLog.all
+            .where("vehicle_id = ? AND log_type = ?", params[:id], FILL_UP)
+            .average("miles_driven / quantity")
+    
+        totals = {cost: total_cost, mpg: average_mpg}
+        totals.to_json
     end
 
     # add a log for a vehicle

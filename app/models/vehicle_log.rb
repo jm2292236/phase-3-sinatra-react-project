@@ -9,7 +9,6 @@ class VehicleLog < ActiveRecord::Base
             .where("vehicle_id = ? and log_date <= ?", 
                 vehicle_id, log_date)
             .last
-        binding.pry
         if last_log == nil
             last_odometer = 0
         else
@@ -19,7 +18,6 @@ class VehicleLog < ActiveRecord::Base
 
     def self.log_with_relationships(vehicle_id)
         log = VehicleLog.all.where("vehicle_id = ?", vehicle_id)
-        binding.pry
 
         new_log = log.map("record")
         new_log.to_json
